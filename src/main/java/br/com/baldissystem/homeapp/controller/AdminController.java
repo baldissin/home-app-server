@@ -57,7 +57,7 @@ public class AdminController {
         return ResponseEntity.badRequest().body("Person not found.");
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody LoginRequest request){
         Admin admin = adminRepository.findByLogin(request.getLogin());
 
