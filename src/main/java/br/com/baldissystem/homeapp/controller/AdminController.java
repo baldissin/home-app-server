@@ -4,13 +4,9 @@ import br.com.baldissystem.homeapp.model.Admin;
 import br.com.baldissystem.homeapp.repository.AdminRepository;
 import br.com.baldissystem.homeapp.viewmodels.LoginRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
 
-import java.lang.reflect.Parameter;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
