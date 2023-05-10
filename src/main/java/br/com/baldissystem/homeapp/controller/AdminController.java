@@ -59,11 +59,11 @@ public class AdminController {
 
         if(admin != null){
             if(admin.getPassword().equals(request.getPassword())){
-                return ResponseEntity.ok("Auth completed.");
+                return ResponseEntity.ok("Bem vindo(a) " + admin.getName());
             }
-            return ResponseEntity.badRequest().body("Wrong password.");
+            return ResponseEntity.badRequest().body("Senha incorreta.");
         }
-        return ResponseEntity.badRequest().body("Person not found.");
+        return ResponseEntity.badRequest().body("Usuário não encontrado.");
     }
 
 }
