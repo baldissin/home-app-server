@@ -1,6 +1,7 @@
 package br.com.baldissystem.homeapp.controller;
 
 import br.com.baldissystem.homeapp.model.Admin;
+import br.com.baldissystem.homeapp.model.GenericMessages;
 import br.com.baldissystem.homeapp.repository.AdminRepository;
 import br.com.baldissystem.homeapp.viewmodels.LoginRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class AdminController {
     public ResponseEntity<Object> add(@RequestBody Admin admin){
         admin.setCreationDate(Instant.now());
         adminRepository.save(admin);
-        return ResponseEntity.ok("Saved successfully");
+        return ResponseEntity.ok(GenericMessages.SAVED);
     }
 
     @PutMapping("/{id}")
@@ -37,20 +38,20 @@ public class AdminController {
             Admin current = optionalCurrent.get();
             current.merge(admin);
             adminRepository.save(current);
-            return ResponseEntity.ok("Saved successfully");
+            return ResponseEntity.ok(GenericMessages.SAVED);
         }
 
-        return ResponseEntity.badRequest().body("Person not found.");
+        return ResponseEntity.badRequest().body(GenericMessages.PERSON_NOT_FOUND);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable Integer id){
         if(adminRepository.existsById(id)) {
             adminRepository.deleteById(id);
-            return ResponseEntity.ok("Saved successfully");
+            return ResponseEntity.ok(GenericMessages.SAVED);
         }
 
-        return ResponseEntity.badRequest().body("Person not found.");
+        return ResponseEntity.badRequest().body(GenericMessages.PERSON_NOT_FOUND);
     }
 
     @PostMapping("/login")
@@ -59,11 +60,11 @@ public class AdminController {
 
         if(admin != null){
             if(admin.getPassword().equals(request.getPassword())){
-                return ResponseEntity.ok("Bem vindo(a) " + admin.getName());
+                return ResponseEntity.ok(GenericMessages.WELCOME + admin.getName());
             }
-            return ResponseEntity.badRequest().body("Senha incorreta.");
+            return ResponseEntity.badRequest().body(GenericMessages.WRONG_PASSWORD);
         }
-        return ResponseEntity.badRequest().body("Usuário não encontrado.");
+        return ResponseEntity.badRequest().body(GenericMessages.USER_NOT_FOUND);
     }
 
 }
